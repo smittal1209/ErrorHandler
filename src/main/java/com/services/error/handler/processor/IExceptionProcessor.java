@@ -7,5 +7,5 @@ import com.services.error.handler.exceptions.BaseException;
  * @created 25/02/20
  */
 public interface IExceptionProcessor {
-    public BaseException processException(Exception e);
+    BaseException processException(Exception e);
 }

@@ -5,5 +5,5 @@ package com.services.error.handler.handler;
  * @created 25/02/20
  */
 public interface IExceptionHandler {
-    public ErrorResponse handleException(Exception e);
+    ErrorResponse handleException(Exception e);
 }

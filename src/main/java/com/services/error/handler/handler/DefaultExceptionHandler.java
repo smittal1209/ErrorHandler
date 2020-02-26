@@ -4,7 +4,6 @@ import com.services.error.handler.exceptions.BaseException;
 import com.services.error.handler.processor.DefaultExceptionProcessor;
 import com.services.error.handler.processor.IExceptionProcessor;
 import com.services.error.handler.task.ITask;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +19,16 @@ public class DefaultExceptionHandler implements IExceptionHandler {
 
     private IExceptionProcessor exceptionProcessor;
 
-    @Setter
     private List<ITask> tasks;
 
-    @Setter
+    public void setTasks(List<ITask> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setResponseGenerator(IResponseGenerator responseGenerator) {
+        this.responseGenerator = responseGenerator;
+    }
+
     private IResponseGenerator responseGenerator;
 
     public DefaultExceptionHandler(IExceptionProcessor exceptionProcessor, IResponseGenerator responseGenerator) {

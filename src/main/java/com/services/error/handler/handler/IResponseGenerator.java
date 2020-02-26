@@ -8,5 +8,5 @@ import com.services.error.handler.exceptions.BaseException;
  */
 public interface IResponseGenerator {
 
-    public ErrorResponse<Object> generate(BaseException baseException);
+    ErrorResponse<Object> generate(BaseException baseException);
 }

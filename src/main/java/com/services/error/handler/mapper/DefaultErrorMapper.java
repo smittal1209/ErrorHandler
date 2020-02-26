@@ -13,12 +13,12 @@ public class DefaultErrorMapper implements IErrorMapper<String, String> {
 
     public DefaultErrorMapper(Map<String, String> codeVsMessage) {
         super();
-        this.codeVsMessage = new ConcurrentHashMap<String, String>(codeVsMessage);
+        this.codeVsMessage = new ConcurrentHashMap<>(codeVsMessage);
     }
 
     public DefaultErrorMapper() {
         super();
-        codeVsMessage = new ConcurrentHashMap<String, String>();
+        codeVsMessage = new ConcurrentHashMap<>();
     }
 
     @Override

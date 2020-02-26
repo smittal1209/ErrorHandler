@@ -41,9 +41,9 @@ public class DefaultExceptionProcessor implements IExceptionProcessor {
 
     @Override
     public BaseException processException(Exception e) {
-        BaseException baseException = null;
+        BaseException baseException;
         String errorMessage = processThrowable(e);
-        IBaseError<?> defaultBaseError = null;
+        IBaseError<?> defaultBaseError;
         if (e instanceof BaseException) {
             logger.debug("Going to process Exception as BaseException");
             baseException = (BaseException) e;

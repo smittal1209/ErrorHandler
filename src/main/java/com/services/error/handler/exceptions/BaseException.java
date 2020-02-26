@@ -2,52 +2,58 @@ package com.services.error.handler.exceptions;
 
 import java.util.Map;
 
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * @author shashankmittal
  * @created 25/02/20
  */
-@Getter
-@ToString
 public class BaseException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
-	protected IBaseError<?> baseError;
+    static final long serialVersionUID = -7034897190745766939L;
 
-	public BaseException(IBaseError<?> baseError) {
-		this.baseError = baseError;
-	}
+    protected IBaseError<?> baseError;
 
-	public BaseException(String errorMessage, Throwable t) {
-		super(errorMessage, t);
-		baseError = new DefaultBaseError<Map<String, String>>(errorMessage);
-	}
+    public BaseException(IBaseError<?> baseError) {
+        this.baseError = baseError;
+    }
 
-	public BaseException(String errorMessage) {
-		super(errorMessage);
-		baseError = new DefaultBaseError<Map<String, String>>(errorMessage);
-	}
+    public BaseException(String errorMessage, Throwable t) {
+        super(errorMessage, t);
+        baseError = new DefaultBaseError<Map<String, String>>(errorMessage);
+    }
 
-	public BaseException(String errorCode, String errorMessage) {
-		super(errorMessage);
-		baseError = new DefaultBaseError<Map<String, String>>(errorCode, errorMessage);
-	}
+    public BaseException(String errorMessage) {
+        super(errorMessage);
+        baseError = new DefaultBaseError<Map<String, String>>(errorMessage);
+    }
 
-	public BaseException(String errorCode, String errorMessage, Throwable t) {
-		super(errorMessage, t);
-		baseError = new DefaultBaseError<Map<String, String>>(errorCode, errorMessage);
-	}
+    public BaseException(String errorCode, String errorMessage) {
+        super(errorMessage);
+        baseError = new DefaultBaseError<Map<String, String>>(errorCode, errorMessage);
+    }
 
-	public BaseException(String errorCode, String errorMessage, String userMessage) {
-		super(errorMessage);
-		baseError = new DefaultBaseError<Map<String, String>>(errorCode, userMessage, errorMessage);
-	}
+    public BaseException(String errorCode, String errorMessage, Throwable t) {
+        super(errorMessage, t);
+        baseError = new DefaultBaseError<Map<String, String>>(errorCode, errorMessage);
+    }
 
-	public BaseException(IBaseError<?> baseError, Throwable t) {
-		super(t);
-		this.baseError = baseError;
-	}
+    public BaseException(String errorCode, String errorMessage, String userMessage) {
+        super(errorMessage);
+        baseError = new DefaultBaseError<Map<String, String>>(errorCode, userMessage, errorMessage);
+    }
 
+    public BaseException(IBaseError<?> baseError, Throwable t) {
+        super(t);
+        this.baseError = baseError;
+    }
+
+    public IBaseError<?> getBaseError() {
+        return baseError;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseException{" +
+                "baseError=" + baseError +
+                '}';
+    }
 }

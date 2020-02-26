@@ -1,13 +1,10 @@
 package com.services.error.handler.exceptions;
 
-import lombok.ToString;
-
 /**
  * @param <T>
  * @author shashankmittal
  * @created 25/02/20
  */
-@ToString
 public class DefaultBaseError<T> implements IBaseError<T> {
 
     private String errorCode;

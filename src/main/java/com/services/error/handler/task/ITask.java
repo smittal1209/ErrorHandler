@@ -8,5 +8,5 @@ import com.services.error.handler.handler.ErrorResponse;
  * @created 25/02/20
  */
 public interface ITask {
-    public void execute(ErrorResponse<?> errorResponse, BaseException e);
+    void execute(ErrorResponse<?> errorResponse, BaseException e);
 }

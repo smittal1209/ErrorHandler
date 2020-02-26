@@ -7,9 +7,9 @@ package com.services.error.handler.mapper;
  * @created 25/02/20
  */
 public interface IErrorMapper<T, R> {
-    public boolean isErrorKnown(T error);
+    boolean isErrorKnown(T error);
 
-    public R getErrorMapping(T error);
+    R getErrorMapping(T error);
 
-    public void addErrorMapping(T error, R mapping);
+    void addErrorMapping(T error, R mapping);
 }

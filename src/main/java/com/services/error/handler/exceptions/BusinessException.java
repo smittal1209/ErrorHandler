@@ -1,14 +1,9 @@
 package com.services.error.handler.exceptions;
 
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * @author shashankmittal
  * @created 25/02/20
  */
-@Getter
-@ToString(callSuper = true)
 public class BusinessException extends BaseException {
     public BusinessException(IBaseError<?> baseError) {
         super(baseError);

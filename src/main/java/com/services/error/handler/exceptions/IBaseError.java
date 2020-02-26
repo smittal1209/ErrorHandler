@@ -6,11 +6,11 @@ package com.services.error.handler.exceptions;
  * @created 25/02/20
  */
 public interface IBaseError<T> {
-    public String getErrorCode();
+    String getErrorCode();
 
-    public String getErrorMessage();
+    String getErrorMessage();
 
-    public String getUserMessage();
+    String getUserMessage();
 
-    public T getMetadata();
+    T getMetadata();
 }
