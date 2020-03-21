@@ -1,4 +1,4 @@
-package com.services.error.handler.mapper;
+package com.services.error.handler.mappers;
 
 /**
  * @param <T>
@@ -7,6 +7,7 @@ package com.services.error.handler.mapper;
  * @created 25/02/20
  */
 public interface IErrorMapper<T, R> {
+
     boolean isErrorKnown(T error);
 
     R getErrorMapping(T error);

@@ -1,7 +1,7 @@
-package com.services.error.handler.task;
+package com.services.error.handler.tasks;
 
 import com.services.error.handler.exceptions.BaseException;
-import com.services.error.handler.handler.ErrorResponse;
+import com.services.error.handler.responses.ErrorResponse;
 
 /**
  * @author shashankmittal

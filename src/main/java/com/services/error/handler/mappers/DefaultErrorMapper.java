@@ -1,4 +1,4 @@
-package com.services.error.handler.mapper;
+package com.services.error.handler.mappers;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,12 +12,10 @@ public class DefaultErrorMapper implements IErrorMapper<String, String> {
     private Map<String, String> codeVsMessage;
 
     public DefaultErrorMapper(Map<String, String> codeVsMessage) {
-        super();
         this.codeVsMessage = new ConcurrentHashMap<>(codeVsMessage);
     }
 
     public DefaultErrorMapper() {
-        super();
         codeVsMessage = new ConcurrentHashMap<>();
     }
 
@@ -37,7 +35,7 @@ public class DefaultErrorMapper implements IErrorMapper<String, String> {
     @Override
     public void addErrorMapping(String error, String mapping) {
         if (error != null && error.trim().length() >= 0) {
-            codeVsMessage.put(error, mapping);
+            codeVsMessage.put(error.trim(), mapping);
         }
     }
 

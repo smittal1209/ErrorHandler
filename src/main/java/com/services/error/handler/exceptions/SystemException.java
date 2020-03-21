@@ -1,12 +1,14 @@
 package com.services.error.handler.exceptions;
 
+import com.services.error.handler.errors.IError;
+
 /**
  * @author shashankmittal
  * @created 25/02/20
  */
 public class SystemException extends BaseException {
 
-    public SystemException(IBaseError<?> baseError, Throwable cause) {
+    public SystemException(IError<?> baseError, Throwable cause) {
         super(baseError, cause);
     }
 

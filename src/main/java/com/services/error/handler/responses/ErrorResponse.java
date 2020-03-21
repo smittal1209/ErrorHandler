@@ -1,4 +1,4 @@
-package com.services.error.handler.handler;
+package com.services.error.handler.responses;
 
 /**
  * @param <T>
@@ -6,29 +6,24 @@ package com.services.error.handler.handler;
  * @created 25/02/20
  */
 public class ErrorResponse<T> {
+
     private String errorCode;
     private String errorMessage;
-    private String userMessage;
+    private String displayMessage;
     private T metadata;
 
-    public ErrorResponse(String errorCode, String errorMessage, String userMessage, T metadata) {
-        super();
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-        this.userMessage = userMessage;
-        this.metadata = metadata;
-    }
-
     public ErrorResponse(String errorCode, String errorMessage) {
-        super();
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
 
-    public ErrorResponse(String errorCode, String errorMessage, T metadata) {
-        super();
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
+    public ErrorResponse(String errorCode, String errorMessage, String displayMessage) {
+        this(errorCode, errorMessage);
+        this.displayMessage = displayMessage;
+    }
+
+    public ErrorResponse(String errorCode, String errorMessage, String displayMessage, T metadata) {
+        this(errorCode, errorMessage, displayMessage);
         this.metadata = metadata;
     }
 
@@ -48,12 +43,12 @@ public class ErrorResponse<T> {
         this.errorMessage = errorMessage;
     }
 
-    public String getUserMessage() {
-        return userMessage;
+    public String getDisplayMessage() {
+        return displayMessage;
     }
 
-    public void setUserMessage(String userMessage) {
-        this.userMessage = userMessage;
+    public void setDisplayMessage(String displayMessage) {
+        this.displayMessage = displayMessage;
     }
 
     public T getMetadata() {

@@ -1,11 +1,14 @@
 package com.services.error.handler.exceptions;
 
+import com.services.error.handler.errors.IError;
+
 /**
  * @author shashankmittal
  * @created 25/02/20
  */
 public class BusinessException extends BaseException {
-    public BusinessException(IBaseError<?> baseError) {
+
+    public BusinessException(IError<?> baseError) {
         super(baseError);
     }
 
@@ -13,7 +16,7 @@ public class BusinessException extends BaseException {
         super(errorCode, errorMessage);
     }
 
-    public BusinessException(String errorCode, String errorMessage, String userMessage) {
-        super(errorCode, errorMessage, userMessage);
+    public BusinessException(String errorCode, String errorMessage, String displayMessage) {
+        super(errorCode, errorMessage, displayMessage);
     }
 }

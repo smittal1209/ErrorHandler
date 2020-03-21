@@ -1,4 +1,4 @@
-package com.services.error.handler.processor;
+package com.services.error.handler.processors;
 
 import com.services.error.handler.exceptions.BaseException;
 
@@ -7,5 +7,7 @@ import com.services.error.handler.exceptions.BaseException;
  * @created 25/02/20
  */
 public interface IExceptionProcessor {
+
     BaseException processException(Exception e);
+    
 }

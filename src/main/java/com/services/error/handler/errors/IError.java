@@ -1,16 +1,17 @@
-package com.services.error.handler.exceptions;
+package com.services.error.handler.errors;
 
 /**
  * @param <T>
  * @author shashankmittal
  * @created 25/02/20
  */
-public interface IBaseError<T> {
+public interface IError<T> {
+
     String getErrorCode();
 
     String getErrorMessage();
 
-    String getUserMessage();
+    String getDisplayMessage();
 
     T getMetadata();
 }

@@ -1,12 +1,16 @@
-package com.services.error.handler.handler;
+package com.services.error.handler.handlers;
 
 import com.services.error.handler.exceptions.BaseException;
-import com.services.error.handler.processor.DefaultExceptionProcessor;
-import com.services.error.handler.processor.IExceptionProcessor;
-import com.services.error.handler.task.ITask;
+import com.services.error.handler.generators.DefaultResponseGenerator;
+import com.services.error.handler.generators.IResponseGenerator;
+import com.services.error.handler.processors.DefaultExceptionProcessor;
+import com.services.error.handler.processors.IExceptionProcessor;
+import com.services.error.handler.responses.ErrorResponse;
+import com.services.error.handler.tasks.ITask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,36 +23,37 @@ public class DefaultExceptionHandler implements IExceptionHandler {
 
     private IExceptionProcessor exceptionProcessor;
 
-    private List<ITask> tasks;
+    private IResponseGenerator responseGenerator;
+
+    private List<ITask> tasks = new ArrayList<>();
+
+    public DefaultExceptionHandler() {
+        this.exceptionProcessor = new DefaultExceptionProcessor();
+        this.responseGenerator = new DefaultResponseGenerator();
+    }
+
+    public DefaultExceptionHandler(IExceptionProcessor exceptionProcessor, IResponseGenerator responseGenerator) {
+        this.exceptionProcessor = exceptionProcessor;
+        this.responseGenerator = responseGenerator;
+    }
 
     public void setTasks(List<ITask> tasks) {
-        this.tasks = tasks;
+        this.tasks = tasks == null ? new ArrayList<>() : tasks;
     }
 
     public void setResponseGenerator(IResponseGenerator responseGenerator) {
         this.responseGenerator = responseGenerator;
     }
 
-    private IResponseGenerator responseGenerator;
-
-    public DefaultExceptionHandler(IExceptionProcessor exceptionProcessor, IResponseGenerator responseGenerator) {
-        super();
-        this.exceptionProcessor = exceptionProcessor;
-        this.responseGenerator = responseGenerator;
-    }
-
-    public DefaultExceptionHandler(IResponseGenerator responseGenerator) {
-        super();
-        exceptionProcessor = new DefaultExceptionProcessor();
-        this.responseGenerator = responseGenerator;
-    }
-
     @Override
     public ErrorResponse<Object> handleException(Exception e) {
         BaseException baseException = exceptionProcessor.processException(e);
+
         ErrorResponse<Object> errorResponse = responseGenerator.generate(baseException);
-        logger.debug("Returning ErrorResponse as {}", errorResponse);
+
         executeTasks(errorResponse, baseException);
+
+        logger.debug("Returning ErrorResponse as {}", errorResponse);
         return errorResponse;
     }
 

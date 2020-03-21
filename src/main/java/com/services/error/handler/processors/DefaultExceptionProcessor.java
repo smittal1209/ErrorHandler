@@ -1,9 +1,9 @@
-package com.services.error.handler.processor;
+package com.services.error.handler.processors;
 
-import com.services.error.handler.constants.ExceptionCodesEnum;
+import com.services.error.handler.constants.DefaultExceptionCodesEnum;
+import com.services.error.handler.errors.DefaultError;
+import com.services.error.handler.errors.IError;
 import com.services.error.handler.exceptions.BaseException;
-import com.services.error.handler.exceptions.DefaultBaseError;
-import com.services.error.handler.exceptions.IBaseError;
 import com.services.error.handler.exceptions.SystemException;
 import com.services.error.handler.utils.Utility;
 import org.slf4j.Logger;
@@ -23,44 +23,42 @@ public class DefaultExceptionProcessor implements IExceptionProcessor {
     private List<String> packageFilter;
 
     public DefaultExceptionProcessor(String defaultPackage) {
-        super();
-        packageFilter = new ArrayList<String>();
+        packageFilter = new ArrayList<>();
         if (!Utility.isNullOrBlank(defaultPackage)) {
             packageFilter.add(defaultPackage);
         }
     }
 
     public DefaultExceptionProcessor(List<String> packageFilter) {
-        super();
         this.packageFilter = packageFilter;
     }
 
     public DefaultExceptionProcessor() {
-        packageFilter = new ArrayList<String>();
+        packageFilter = new ArrayList<>();
     }
 
     @Override
     public BaseException processException(Exception e) {
         BaseException baseException;
         String errorMessage = processThrowable(e);
-        IBaseError<?> defaultBaseError;
+        IError<?> defaultBaseError;
         if (e instanceof BaseException) {
-            logger.debug("Going to process Exception as BaseException");
+            logger.debug("BaseException Found :: [{}]", e.getClass().getName());
             baseException = (BaseException) e;
             if (baseException.getBaseError() != null) {
                 return baseException;
             } else {
-                logger.debug("BaseError not found in BaseException.");
-                return new BaseException(ExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorCode(),
-                        ExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorMessage());
+                logger.debug("Error not found in BaseException.");
+                return new BaseException(DefaultExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorCode(),
+                        DefaultExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorMessage());
             }
         } else {
-            logger.debug("Going to process Exception as Exception");
-            defaultBaseError = new DefaultBaseError<Void>(ExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorCode(),
-                    ExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorMessage(), errorMessage);
+            logger.debug("Non BaseException Found :: [{}]", e.getClass().getName());
+            defaultBaseError = new DefaultError<Void>(DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorCode(),
+                    DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorMessage(), errorMessage);
             baseException = new SystemException(defaultBaseError, e);
         }
-        logger.debug("Processed BaseException : {}", baseException);
+        logger.debug("Processed BaseException : [{}]", baseException, e);
         return baseException;
     }
 
@@ -79,7 +77,7 @@ public class DefaultExceptionProcessor implements IExceptionProcessor {
 
     private boolean isTraceFiltered(StackTraceElement stackTraceElement) {
         String className = stackTraceElement.getClassName();
-        if (packageFilter == null || !(packageFilter != null && packageFilter.size() > 0)) {
+        if (packageFilter == null || packageFilter.size() == 0) {
             return true;
         }
         for (String string : packageFilter) {

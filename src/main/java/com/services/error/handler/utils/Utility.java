@@ -24,7 +24,7 @@ public class Utility {
      */
     public static Map<String, String> getErrorMapping(File file) throws IOException {
         FileReader reader = new FileReader(file);
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         Properties properties = new Properties();
         properties.load(reader);
         for (final String name : properties.stringPropertyNames()) {
