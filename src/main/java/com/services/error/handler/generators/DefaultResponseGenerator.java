@@ -29,13 +29,9 @@ public class DefaultResponseGenerator implements IResponseGenerator<Object> {
 
         ErrorResponse<Object> errorResponse;
 
-        String errorCode = baseException.getBaseError().getErrorCode() != null
-                ? baseException.getBaseError().getErrorCode()
-                : DefaultExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorCode();
+        String errorCode = getErrorCode(baseException);
 
-        String errorMessage = baseException.getBaseError().getErrorMessage() != null
-                ? baseException.getBaseError().getErrorMessage()
-                : DefaultExceptionCodesEnum.DEFAULT_BASE_EXCEPTION.getErrorMessage();
+        String errorMessage = getErrorMessage(baseException);
 
         String displayMessage = getDisplayMessage(baseException);
 
@@ -61,5 +57,25 @@ public class DefaultResponseGenerator implements IResponseGenerator<Object> {
                     : defaultUserMessage;
         }
         return displayMessage;
+    }
+
+    private String getErrorCode(BaseException baseException) {
+        if (baseException.getBaseError().getErrorCode() != null) {
+            return baseException.getBaseError().getErrorCode();
+        }
+        return baseException instanceof BusinessException
+                ? DefaultExceptionCodesEnum.DEFAULT_BUSINESS_EXCEPTION.getErrorCode()
+                : DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorCode();
+
+    }
+
+    private String getErrorMessage(BaseException baseException) {
+        if (baseException.getBaseError().getErrorMessage() != null) {
+            return baseException.getBaseError().getErrorMessage();
+        }
+        return baseException instanceof BusinessException
+                ? DefaultExceptionCodesEnum.DEFAULT_BUSINESS_EXCEPTION.getErrorMessage()
+                : DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorMessage();
+
     }
 }

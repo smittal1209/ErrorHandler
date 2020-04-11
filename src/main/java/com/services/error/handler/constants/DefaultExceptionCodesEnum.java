@@ -6,7 +6,6 @@ package com.services.error.handler.constants;
  */
 public enum DefaultExceptionCodesEnum {
 
-    DEFAULT_BASE_EXCEPTION("BE-100", "Something went wrong! Please try again later!"),
     DEFAULT_BUSINESS_EXCEPTION("BE-400", "Something went wrong! Please try again later!"),
     DEFAULT_SYSTEM_EXCEPTION("SE-500", "Something went wrong! Please try again later!");
 

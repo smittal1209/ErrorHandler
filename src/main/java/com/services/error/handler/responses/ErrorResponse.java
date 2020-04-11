@@ -58,4 +58,14 @@ public class ErrorResponse<T> {
     public void setMetadata(T metadata) {
         this.metadata = metadata;
     }
+
+    @Override
+    public String toString() {
+        return "ErrorResponse{" +
+                "errorCode='" + errorCode + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                ", displayMessage='" + displayMessage + '\'' +
+                ", metadata=" + metadata +
+                '}';
+    }
 }

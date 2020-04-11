@@ -16,14 +16,12 @@ public class ExceptionAuditLoggerTask implements ITask {
 
     @Override
     public void execute(ErrorResponse<?> errorResponse, BaseException e) {
-        String logMessage = new StringBuilder()
-                .append("ErrorCode : ")
-                .append(e.getBaseError().getErrorCode())
-                .append(" ErrorMessage : ")
-                .append(e.getBaseError().getErrorMessage())
-                .append(" UserMessage : ")
-                .append(e.getBaseError().getDisplayMessage())
-                .toString();
+        String logMessage = "ErrorCode : " +
+                e.getBaseError().getErrorCode() +
+                " ErrorMessage : " +
+                e.getBaseError().getErrorMessage() +
+                " DisplayMessage : " +
+                e.getBaseError().getDisplayMessage();
         logger.error(logMessage);
     }
 }

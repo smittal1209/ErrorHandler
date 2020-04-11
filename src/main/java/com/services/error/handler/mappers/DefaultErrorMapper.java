@@ -26,7 +26,7 @@ public class DefaultErrorMapper implements IErrorMapper<String, String> {
 
     @Override
     public String getErrorMapping(String error) {
-        if (error != null && error.trim().length() >= 0) {
+        if (error != null && error.length() > 0) {
             return codeVsMessage.get(error);
         }
         return null;
@@ -34,7 +34,7 @@ public class DefaultErrorMapper implements IErrorMapper<String, String> {
 
     @Override
     public void addErrorMapping(String error, String mapping) {
-        if (error != null && error.trim().length() >= 0) {
+        if (error != null && error.length() > 0) {
             codeVsMessage.put(error.trim(), mapping);
         }
     }

@@ -1,15 +1,13 @@
 package com.services.error.handler.factories;
 
 import com.services.error.handler.generators.DefaultResponseGenerator;
-import com.services.error.handler.generators.IResponseGenerator;
 import com.services.error.handler.handlers.DefaultExceptionHandler;
 import com.services.error.handler.handlers.IExceptionHandler;
 import com.services.error.handler.mappers.DefaultErrorMapper;
 import com.services.error.handler.mappers.IErrorMapper;
 import com.services.error.handler.processors.DefaultExceptionProcessor;
 import com.services.error.handler.processors.IExceptionProcessor;
-import com.services.error.handler.services.BusinessMonitoredService;
-import com.services.error.handler.services.SystemMonitoredService;
+import com.services.error.handler.services.DummyService;
 import com.services.error.handler.tasks.ExceptionAuditLoggerTask;
 import com.services.error.handler.tasks.ITask;
 import com.services.error.handler.utils.Utility;
@@ -27,43 +25,39 @@ import java.util.Map;
  */
 public class ObjectFactory {
 
-    public static SystemMonitoredService systemMonitoredService() {
-        return new SystemMonitoredService();
-    }
-
-    public static BusinessMonitoredService businessMonitoredService() {
-        return new BusinessMonitoredService();
-    }
-
-    public static IErrorMapper<String, String> errorMapper() {
-        Map<String, String> errorMapping = null;
-        IErrorMapper<String, String> errorMapper = null;
+    public static IErrorMapper<String, String> getErrorMapper() {
+        Map<String, String> errorMapping;
+        IErrorMapper<String, String> errorMapper;
         try {
             URL fileUrl = ObjectFactory.class.getClassLoader().getResource("errorCodeMapper.properties");
             errorMapping = Utility.getErrorMapping(new File(fileUrl.getFile()));
             errorMapper = new DefaultErrorMapper(errorMapping);
         } catch (IOException e) {
-            e.printStackTrace();
             errorMapper = new DefaultErrorMapper();
         }
         return errorMapper;
     }
 
-    public static IResponseGenerator responseGeneratorWithMapper() {
-        IResponseGenerator responseGenerator = new DefaultResponseGenerator(errorMapper());
-        return responseGenerator;
+    public static DefaultResponseGenerator getResponseGeneratorWithErrorMapper() {
+        return new DefaultResponseGenerator(getErrorMapper());
     }
 
-    public static IExceptionHandler exceptionHandlerDefault() {
-        DefaultExceptionHandler defaultExceptionHandler = new DefaultExceptionHandler();
-        defaultExceptionHandler.setTasks(getTasks());
-        return defaultExceptionHandler;
+    public static DefaultExceptionProcessor getExceptionProcessor() {
+        return new DefaultExceptionProcessor();
+    }
+
+    public static DefaultExceptionHandler getDefaultExceptionHandler() {
+        return new DefaultExceptionHandler();
+    }
+
+    public static DummyService getDummyService() {
+        return new DummyService();
     }
 
     public static IExceptionHandler exceptionHandlerWithPackageFilter() {
         IExceptionProcessor exceptionProcessor = new DefaultExceptionProcessor("");
         DefaultExceptionHandler defaultExceptionHandler = new DefaultExceptionHandler(exceptionProcessor,
-                responseGeneratorWithMapper());
+                getResponseGeneratorWithErrorMapper());
         defaultExceptionHandler.setTasks(getTasks());
         return defaultExceptionHandler;
     }

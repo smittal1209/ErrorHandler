@@ -9,7 +9,7 @@ import java.util.Map;
  * @author shashankmittal
  * @created 25/02/20
  */
-public class BaseException extends RuntimeException {
+public abstract class BaseException extends RuntimeException {
 
     static final long serialVersionUID = -7034897190745766939L;
 
