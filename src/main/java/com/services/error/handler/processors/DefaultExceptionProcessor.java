@@ -1,6 +1,6 @@
 package com.services.error.handler.processors;
 
-import com.services.error.handler.constants.DefaultExceptionCodesEnum;
+import com.services.error.handler.enums.DefaultExceptionCodesEnum;
 import com.services.error.handler.errors.DefaultError;
 import com.services.error.handler.errors.IError;
 import com.services.error.handler.exceptions.BaseException;
@@ -21,7 +21,7 @@ public class DefaultExceptionProcessor implements IExceptionProcessor {
 
     private final Logger logger = LoggerFactory.getLogger(DefaultExceptionProcessor.class);
 
-    private List<String> packageFilter;
+    private final List<String> packageFilter;
 
     public DefaultExceptionProcessor(String defaultPackage) {
         packageFilter = new ArrayList<>();
@@ -63,7 +63,7 @@ public class DefaultExceptionProcessor implements IExceptionProcessor {
     private SystemException getSystemException(Exception e) {
         String errorMessage = processThrowable(e);
         IError<?> defaultBaseError = new DefaultError<Void>(DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorCode(),
-                DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorMessage(), errorMessage);
+                errorMessage, DefaultExceptionCodesEnum.DEFAULT_SYSTEM_EXCEPTION.getErrorMessage());
         return new SystemException(defaultBaseError, e);
     }
 

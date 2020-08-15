@@ -1,4 +1,4 @@
-package com.services.error.handler.constants;
+package com.services.error.handler.enums;
 
 /**
  * @author shashankmittal
@@ -9,8 +9,8 @@ public enum DefaultExceptionCodesEnum {
     DEFAULT_BUSINESS_EXCEPTION("BE-400", "Something went wrong! Please try again later!"),
     DEFAULT_SYSTEM_EXCEPTION("SE-500", "Something went wrong! Please try again later!");
 
-    private String errorCode;
-    private String errorMessage;
+    private final String errorCode;
+    private final String errorMessage;
 
     DefaultExceptionCodesEnum(String code, String message) {
         errorCode = code;

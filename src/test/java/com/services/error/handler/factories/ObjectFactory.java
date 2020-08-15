@@ -2,7 +2,6 @@ package com.services.error.handler.factories;
 
 import com.services.error.handler.generators.DefaultResponseGenerator;
 import com.services.error.handler.handlers.DefaultExceptionHandler;
-import com.services.error.handler.handlers.IExceptionHandler;
 import com.services.error.handler.mappers.DefaultErrorMapper;
 import com.services.error.handler.mappers.IErrorMapper;
 import com.services.error.handler.processors.DefaultExceptionProcessor;
@@ -54,8 +53,8 @@ public class ObjectFactory {
         return new DummyService();
     }
 
-    public static IExceptionHandler exceptionHandlerWithPackageFilter() {
-        IExceptionProcessor exceptionProcessor = new DefaultExceptionProcessor("");
+    public static DefaultExceptionHandler getDefaultExceptionHandlerWithPackageFilter(String packageName) {
+        IExceptionProcessor exceptionProcessor = new DefaultExceptionProcessor(packageName);
         DefaultExceptionHandler defaultExceptionHandler = new DefaultExceptionHandler(exceptionProcessor,
                 getResponseGeneratorWithErrorMapper());
         defaultExceptionHandler.setTasks(getTasks());

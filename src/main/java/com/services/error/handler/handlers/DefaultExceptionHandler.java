@@ -21,7 +21,7 @@ public class DefaultExceptionHandler implements IExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(DefaultExceptionHandler.class);
 
-    private IExceptionProcessor exceptionProcessor;
+    private final IExceptionProcessor exceptionProcessor;
 
     private IResponseGenerator responseGenerator;
 
@@ -37,8 +37,9 @@ public class DefaultExceptionHandler implements IExceptionHandler {
         this.responseGenerator = responseGenerator;
     }
 
+    @Override
     public void setTasks(List<ITask> tasks) {
-        this.tasks = tasks == null ? new ArrayList<>() : tasks;
+        this.tasks = tasks == null ? new ArrayList<>() : new ArrayList<>(tasks);
     }
 
     public void setResponseGenerator(IResponseGenerator responseGenerator) {

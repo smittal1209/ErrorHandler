@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DefaultErrorMapper implements IErrorMapper<String, String> {
 
-    private Map<String, String> codeVsMessage;
+    private final Map<String, String> codeVsMessage;
 
     public DefaultErrorMapper(Map<String, String> codeVsMessage) {
         this.codeVsMessage = new ConcurrentHashMap<>(codeVsMessage);

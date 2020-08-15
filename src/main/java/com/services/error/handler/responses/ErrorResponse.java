@@ -1,7 +1,7 @@
 package com.services.error.handler.responses;
 
 /**
- * @param <T>
+ * @param <T> The type of Metadata that the error can contain.
  * @author shashankmittal
  * @created 25/02/20
  */

@@ -9,7 +9,7 @@ public class DefaultError<T> implements IError<T> {
 
     private String errorCode;
     private String displayMessage;
-    private String errorMessage;
+    private final String errorMessage;
     private T metaData;
 
     public DefaultError(String errorMessage) {

@@ -1,6 +1,6 @@
 package com.services.error.handler.generators;
 
-import com.services.error.handler.constants.DefaultExceptionCodesEnum;
+import com.services.error.handler.enums.DefaultExceptionCodesEnum;
 import com.services.error.handler.exceptions.BaseException;
 import com.services.error.handler.exceptions.BusinessException;
 import com.services.error.handler.mappers.DefaultErrorMapper;
@@ -14,7 +14,7 @@ import com.services.error.handler.utils.Utility;
  */
 public class DefaultResponseGenerator implements IResponseGenerator<Object> {
 
-    private IErrorMapper<String, String> errorMapper;
+    private final IErrorMapper<String, String> errorMapper;
 
     public DefaultResponseGenerator() {
         this.errorMapper = new DefaultErrorMapper();

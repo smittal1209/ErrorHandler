@@ -17,8 +17,8 @@ public class Utility {
      * Returns a mapping from a properties file. The file should be a standard
      * properties file having key value pairs per line.
      *
-     * @param file
-     * @return Map<String, String>
+     * @param file File object in which error code mappings are defined
+     * @return Map<String, String> A map of error code vs. display message.
      * @throws IOException If the file not found or some exception in reading the file
      *                     content.
      */

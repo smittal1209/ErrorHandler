@@ -7,9 +7,9 @@ package com.services.error.handler.enums;
 public enum KnownExceptionsEnum {
     ENTITY_NOT_FOUND("K1", "Entity Not found!", "Entity Not found!");
 
-    private String code;
-    private String message;
-    private String displayMessage;
+    private final String code;
+    private final String message;
+    private final String displayMessage;
 
     KnownExceptionsEnum(String code, String message, String displayMessage) {
         this.code = code;
