@@ -27,6 +27,7 @@ public class Utility {
         Map<String, String> map = new HashMap<>();
         Properties properties = new Properties();
         properties.load(reader);
+        
         for (final String name : properties.stringPropertyNames()) {
             map.put(name, properties.getProperty(name));
         }
